@@ -11,7 +11,9 @@ trait Queue {
 
   def enqueue(element: Int)
 
-  def dequeue(element: Int)
+  def dequeue(): Unit ={
+    "Now that we are writing the body for dequeue, we have to override it, otherwise it will show error"
+  }
 
   def getQueue: List[Int] = queue
 
@@ -19,7 +21,7 @@ trait Queue {
 
 class DoubleQueue extends Queue
 {
-  override def enqueue(element: Int): Unit = {
+  def enqueue(element: Int): Unit = {
     if (isEmpty){
       front+=1
       rear+=1
@@ -31,7 +33,7 @@ class DoubleQueue extends Queue
     println(getQueue)
   }
 
-  override def dequeue(element: Int): Unit = {
+  override def dequeue(): Unit = {
     if(isEmpty) return
     else if(front==rear) {
       queue = queue.drop(1)
@@ -47,7 +49,7 @@ class DoubleQueue extends Queue
 }
 
 class SquareQueue extends Queue {
-  override def enqueue(element:Int): Unit = {
+  def enqueue(element:Int): Unit = {
     if (isEmpty){
       front+=1
       rear+=1
@@ -59,7 +61,7 @@ class SquareQueue extends Queue {
     println(getQueue)
   }
 
-  override def dequeue(element: Int): Unit = {
+  override def dequeue(): Unit = {
     if(isEmpty) return
     else if(front==rear) {
       queue = queue.drop(1)
@@ -81,13 +83,15 @@ object Main{
     objectDoubleQueue.enqueue(1)
     objectDoubleQueue.enqueue(2)
     objectDoubleQueue.enqueue(3)
-    objectDoubleQueue.dequeue(1)
-    objectDoubleQueue.dequeue(2)
-    objectDoubleQueue.dequeue(3)
-    objectDoubleQueue.dequeue(1)
+    objectDoubleQueue.dequeue()
+    objectDoubleQueue.dequeue()
+    objectDoubleQueue.dequeue()
+    objectDoubleQueue.enqueue(3)
+    objectDoubleQueue.dequeue()
+
     objectSquareQueue.enqueue(4)
     objectSquareQueue.enqueue(5)
     objectSquareQueue.enqueue(6)
-    objectSquareQueue.dequeue(5)
+    objectSquareQueue.dequeue()
   }
 }
